@@ -11,11 +11,11 @@ We included training on a smaller subset, as this is typically provided by all m
 [1] D. J. Meuten, F. M. Moore, and J. W. George, “Mitotic Count and theField of View Area,”Veterinary Pathology, vol. 53, pp. 7–9, Jan. 2016.
 
 
-### Ablation Study: Subsets
+### Ablation Study: Subset of WSIs
 
 The subsets of WSI were chosen from the training set by eliminating from each portion of
 
-|Filename|Mitotic figures|Part of complete Set (23 WSI) | 12 WSI | 6 WSI | 3 WSI |
+|Filename|Mitotic figures|Part of complete Set (23 WSI) | 12 WSI [notebook](RetinaNet-CCMCT-ODAEL_12WSI.ipynb) | 6 WSI [notebook](RetinaNet-CCMCT-ODAEL_6WSI.ipynb) | 3 WSI [notebook](RetinaNet-CCMCT-ODAEL_3WSI.ipynb) |
 |---|---|---|---|---|---|
 | 2f2591b840e83a4b4358.svs | 3 | x |  - | - | - | 
 | ce949341ba99845813ac.svs | 4 | x |  x | x | x | 
@@ -38,4 +38,5 @@ The subsets of WSI were chosen from the training set by eliminating from each po
 | 39ecf7f94ed96824405d.svs | 3689 | x |  x | x | - | 
 | 20c0753af38303691b27.svs | 4343 | x |  x | x | x | 
 | c3eb4b8382b470dd63a9.svs | 4767 | x |  - | - | - |
+
 
