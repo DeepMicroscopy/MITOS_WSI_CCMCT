@@ -17,3 +17,14 @@ One main question behind our research was: How big does a data set need to be? I
 
 Main results of the ablation study were calculated in the ipython notebook: [AblationStudy_Evaluation.ipynb](AblationStudy_Evaluation.ipynb)
 
+## Training notebooks
+
+The training process can be seen in the notebooks for the respective dataset variants:
+
+[RetinaNet-CCMCT-MEL.ipynb](RetinaNet-CCMCT-MEL.ipynb)
+
+[RetinaNet-CCMCT-HEAEL.ipynb](RetinaNet-CCMCT-HEAEL.ipynb)
+
+[RetinaNet-CCMCT-ODAEL.ipynb](RetinaNet-CCMCT-ODAEL.ipynb)
+
+Note: The results (as submitted) were done with a previous version of the notebook, which was afterwards simplified and cleaned up. However, besides the random factor in sampling, there should be no difference between the networks generated with these notebooks and the ones used for the manuscript.
