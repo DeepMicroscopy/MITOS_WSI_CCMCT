@@ -15,7 +15,7 @@ DB = Database()
 DB.open('../databases/MITOS_WSI_CCMCT_ODAEL.sqlite')
 
 DBRK = Database()
-DBRK.open('HighMCAreas.sqlite')
+DBRK.open('databases/HighMCAreas.sqlite')
 
 os.system('cp ../databases/MITOS_WSI_CCMCT_ODAEL.sqlite MITOS_WSI_CCMCT_ODAEL_%dHPF.sqlite' % hpf)
 DBnew = Database()
