@@ -49,22 +49,12 @@ for k in dirs:
     os.system('mkdir -p DataODAEL_%sHPF/test/%s' % (sys.argv[1],k))
 
 
-test_slide_filenames = ['3369_07_B_1_MCT Mitose 2017.tiff',
- '3786_09 A MCT Mitose 2017.tiff',
- '1659_08_1_MCT Mitose 2017.tiff',
- '28_08_A_1_MCT Mitose 2017.tiff',
- '3806_09_B_1_MCT Mitose 2017.tiff',
- '2253_06_A_1_MCT Mitose 2017.tiff',
- '1410_08_A_1_MCT Mitose 2017.tiff',
- '1490_08_1_MCT Mitose 2017.tiff',
- '2281_14_A_1_MCT Mitose 2017.tiff',
- '221_08 MCT Mitose 2017.tiff',
- '5187_11 B MCT Mitose 2017.tiff']
+test_slides_ids = ['27', '30', '31', '6', '18', '20', '1', '2', '3' ,'9', '11']
 
-DB.open('../databases/MITOS_WSI_CMCT_ODAEL_%sHPF.sqlite' % sys.argv[1])#Slides_final_cleaned_checked.sqlite')
+DB.open('../databases/MITOS_WSI_CCMCT_ODAEL_%sHPF.sqlite' % sys.argv[1])#Slides_final_cleaned_checked.sqlite')
 
-for slide,filename in listOfSlides(DB):
-    DB.loadIntoMemory(slide)
+for slideid,filename in listOfSlides(DB):
+    DB.loadIntoMemory(slideid)
     
     
     slide=openslide.open_slide(basepath+filename)
@@ -81,7 +71,7 @@ for slide,filename in listOfSlides(DB):
         img = np.array(slide.read_region(location=(lu_x, lu_y), level=0, size=(patchSize, patchSize)))
         img = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)
 
-        istest = 'train/' if filename not in test_slide_filenames else 'test/'
+        istest = 'train/' if str(slideid) not in test_slides_ids else 'test/'
         if (anno.agreedClass==2):
             if not cv2.imwrite(('DataODAEL_%sHPF/' % sys.argv[1])+istest+'Mitosis/%d.png' % (k), img):
                   print('Write failed: '+('DataODAEL_%sHPF/' % sys.argv[1])+istest+'Mitosis/%d.png' % (k))
