@@ -46,7 +46,7 @@ path = Path('./')
 
 database = Database()
 database.open(str(sys.argv[2]))#Slides_Mitosis_final_checked_cleaned.sqlite'))
-slidedir = 'WSI' if len(sys.argv)<5 else sys.argv[5]
+slidedir = 'WSI' if len(sys.argv)<5 else sys.argv[4]
 datasetname= sys.argv[3]
 
 
@@ -90,7 +90,6 @@ print('%20s: %20s' % ('Validation/test', 'validation' if val=='-val' else 'test'
 # In[4]:
 
 
-lbl_bbox=list()
 files=list()
 train_slides=list()
 val_slides=list()
@@ -109,48 +108,15 @@ for idx, (currslide, filename) in enumerate(tqdm(database.execute(getslides).fet
         slide = openslide.open_slide(str(slide_path))
 
         level = 0#slide.level_count - 1
-        level_dimension = slide.level_dimensions[level]
-        down_factor = slide.level_downsamples[level]
 
-        classes = {2: 1}
-    #    classes = {0: 'unknown', 1: 'Non-Mitosis', 2: 'Mitosis'}
-
-        labels, bboxes = [], []
-        for id, annotation in database.annotations.items():
-            if annotation.agreedClass in classes:
-                annotation.r = 25
-                d = 2 * annotation.r / down_factor
-                x_min = (annotation.x1 - annotation.r) / down_factor
-                y_min = (annotation.y1 - annotation.r) / down_factor
-                x_max = x_min + d
-                y_max = y_min + d
-                label = classes[annotation.agreedClass]
-
-                bboxes.append([int(x_min), int(y_min), int(x_max), int(y_max)])
-                labels.append(label)
-
-
-        if len(bboxes) > 0:
-            lbl_bbox.append([bboxes, labels])
-            files.append(SlideContainer(file=slide_path, level=level, width=size, height=size, y=[bboxes, labels], annotations=dict()))
-            test_slides.append(idx)
+        files.append(SlideContainer(file=slide_path, level=level, width=size, height=size, y=[[], []], annotations=dict()))
+        test_slides.append(idx)
                          
         
 print('Running on slides:', slidenames)
 
-# In[ ]:
-
-
-
-
-
-# In[5]:
-
-
-
 state = torch.load(fname, map_location='cpu')     if defaults.device == torch.device('cpu')     else torch.load(fname)
 model = state.pop('model').cuda()
-print(state.keys())
 mean = state['data']['normalize']['mean']
 std = state['data']['normalize']['std']
 
@@ -161,19 +127,14 @@ std = state['data']['normalize']['std']
 
 
 
-# In[6]:
-
 
 anchors = create_anchors(sizes=[(16,16)], ratios=[1], scales=[0.3, 0.375,0.45])
-#anchors = create_anchors(sizes=[(32,32)], ratios=[1], scales=[0.5, 0.75, 1.0])
 
 detect_thresh = 0.3 
 nms_thresh = 0.4
 result_boxes = {}
 result_regression = {}
 
-
-# In[7]:
 
 
 import multiprocessing
@@ -230,7 +191,6 @@ def rescale_box(bboxes, size: Tensor):
 # In[9]:
 
 
-debug_level=2
 import time
 from functools import partial
 class timerObj():
@@ -254,10 +214,6 @@ with torch.no_grad():
         result_boxes[slide_container.file.name] = []
         result_regression[slide_container.file.name] = []
 
-        basepic = np.array(slide_container.slide.read_region(location=(0, 0),
-                                                             level=debug_level,
-                                                             size=slide_container.slide.level_dimensions[debug_level]))
-        basepic = basepic[:, :, :3].astype(np.uint8)
         print('Processing WSI ...')
 
         n_Images=0
@@ -281,9 +237,7 @@ with torch.no_grad():
                 imageBatch = torch.from_numpy(npBatch.astype(np.float32, copy=False)).cuda()
                 
                 patch = imageBatch
-
                 
-                #patch = [transforms.Normalize(mean,std)(p) for p in patch]
                 for p in range(patch.shape[0]):
                     patch[p] = transforms.Normalize(mean,std)(patch[p])
                 
@@ -315,21 +269,11 @@ with torch.no_grad():
                                                                                          x_box + x_real + w, y_box + y_real + h,
                                                                                          pred, score]))
 
-                                #cv2.rectangle(patch_ori, (int(x_box), int(y_box)), (int(x_box + w), int(y_box + h)),
-                                #              (0, 0, 255), 1)
 
-                                y_box, x_box = box[:2] / slide.level_downsamples[debug_level]
-                                h, w = box[2:4] / slide.level_downsamples[debug_level]
-                                temp_x_real = x_real / slide.level_downsamples[debug_level]
-                                temp_y_real = y_real / slide.level_downsamples[debug_level]
-
-                                cv2.rectangle(basepic, (int(x_box + temp_x_real), int(y_box + temp_y_real)),
-                                              (int(x_box + temp_x_real + w), int(y_box + temp_y_real + h)), (255, 0, 0), 1)
         pickle.dump(result_boxes, open("%s-%s-inference_results_boxes.p" % (fname,datasetname), "wb"))
         
 
 
-# In[ ]:
 
 
 
