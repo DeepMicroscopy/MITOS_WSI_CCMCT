@@ -2,7 +2,7 @@
 
 ## MITOS_WSI_CCMCT data set
 
-This repository contains all code needed to derive the Technical Validation of our paper submitted to Sci Data. 
+This repository contains all code needed to derive the Technical Validation of our paper currently under revision for publication in Scientific Data.
 
 It contains two main parts:
 
