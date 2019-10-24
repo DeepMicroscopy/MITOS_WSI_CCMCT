@@ -27,18 +27,17 @@ def listOfSlides(DB):
     DB.execute('SELECT uid,filename from Slides')
     return DB.fetchall()
 
-test_slide_filenames = ['3369_07_B_1_MCT Mitose 2017.svs',
- '3786_09 A MCT Mitose 2017.svs',
- '1659_08_1_MCT Mitose 2017.svs',
- '28_08_A_1_MCT Mitose 2017.svs',
- '3806_09_B_1_MCT Mitose 2017.svs',
- '2253_06_A_1_MCT Mitose 2017.svs',
- '1410_08_A_1_MCT Mitose 2017.svs',
- '1490_08_1_MCT Mitose 2017.svs',
- '2281_14_A_1_MCT Mitose 2017.svs',
- '221_08 MCT Mitose 2017.svs',
- '5187_11 B MCT Mitose 2017.svs']
-
+test_slide_filenames = ['be10fa37ad6e88e1f406.svs',
+                        'f3741e764d39ccc4d114.svs',
+                        'c86cd41f96331adf3856.svs',
+                        '552c51bfb88fd3e65ffe.svs',
+                        '8c9f9618fcaca747b7c3.svs',
+                        'c91a842257ed2add5134.svs',
+                        'dd4246ab756f6479c841.svs',
+                        'f26e9fcef24609b988be.svs',
+                        '96274538c93980aad8d6.svs',
+                        'add0a9bbc53d1d9bac4c.svs',
+                        '1018715d369dd0df2fc0.svs']
 DB.open('../databases/MITOS_WSI_CCMCT_MEL.sqlite')
 
 for slide,filename in listOfSlides(DB):
