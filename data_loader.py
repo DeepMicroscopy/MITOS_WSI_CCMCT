@@ -113,7 +113,6 @@ class SlideItemList(ItemList):
         self.label_cls,self.inner_df,self.processor = ifnone(label_cls,self._label_cls),inner_df,processor
         self._label_list,self._split = SlideLabelList,ItemLists
         self.copy_new = ['x', 'label_cls', 'path']
-        self.__post_init__()
 
     def __getitem__(self,idxs: int, x: int=0, y: int=0)->Any:
         idxs = try_int(idxs)
