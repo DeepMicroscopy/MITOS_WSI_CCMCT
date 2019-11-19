@@ -335,7 +335,7 @@ def show_results(img, bbox_pred, preds, scores, classes, bbox_gt, preds_gt, figs
         newshape=np.int16(np.sqrt(anchors.shape[0]/splits/sizes)),np.int16(np.sqrt(anchors.shape[0]/splits/sizes))
 
         for i in range(sizes):
-                im = ax[i+2].imshow(np.reshape(torch.sigmoid(pred_act[i::sizes]), newshape=newshape), vmin=0, vmax=1)
+                im = ax[i+2].imshow(np.reshape(torch.sigmoid(pred_act[i::sizes]).cpu(), newshape=newshape), vmin=0, vmax=1)
                 plt.colorbar(im, ax=ax[i+2])
 
     if (cla2_pred is not None):
@@ -358,7 +358,7 @@ def process_output(clas_pred, bbox_pred, anchors, detect_thresh=0.25, use_sigmoi
 
     clas_pred_orig = clas_pred.clone()
     detect_mask = clas_pred.max(1)[0] > detect_thresh
-    if np.array(detect_mask).max() == 0:
+    if np.array(detect_mask.cpu()).max() == 0:
         return {'bbox_pred':None, 'scores':None, 'preds':None, 'clas_pred':clas_pred,'clas_pred_orig': clas_pred_orig, 'detect_mask': detect_mask}
 
     bbox_pred, clas_pred = bbox_pred[detect_mask], clas_pred[detect_mask]
