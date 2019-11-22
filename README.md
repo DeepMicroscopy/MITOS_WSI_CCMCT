@@ -3,7 +3,7 @@
 ## MITOS_WSI_CCMCT data set
 
 This repository contains all code needed to derive the Technical Validation of our paper:
-Bertram, C. A., Aubreville, M., Marzahl, C., Maier, A., & Klopfleisch, R. (2019). A large-scale dataset for mitotic figure assessment on whole slide images of canine cutaneous mast cell tumor. Scientific Data, 6(274), 1--9.
+> Bertram, C. A., Aubreville, M., Marzahl, C., Maier, A., & Klopfleisch, R. (2019). A large-scale dataset for mitotic figure assessment on whole slide images of canine cutaneous mast cell tumor. Scientific Data, 6(274), 1--9.
 
 The paper is open access and can be found [here](https://rdcu.be/bXnmD).
 
