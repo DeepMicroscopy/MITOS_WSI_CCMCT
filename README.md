@@ -5,7 +5,7 @@
 This repository contains all code needed to derive the Technical Validation of our paper:
 Bertram, C. A., Aubreville, M., Marzahl, C., Maier, A., & Klopfleisch, R. (2019). A large-scale dataset for mitotic figure assessment on whole slide images of canine cutaneous mast cell tumor. Scientific Data, 6(274), 1--9.
 
-A short video about it can be found on [https://youtu.be/1UV1_a5qyQM](youtube).
+A short video about it can be found on [youtube](https://youtu.be/1UV1_a5qyQM).
 
 It contains two main parts:
 
@@ -23,7 +23,7 @@ Main results of the ablation study were calculated in the ipython notebook: [Abl
 
 ## Setting up the environment
 
-Besides [https://github.com/fastai/](fast.ai) you can use the following notebook to set up the dataset for you: [Setup.ipynb](Setup.ipynb). The download of the WSI from figshare will take a while. Once everything has been downloaded, you can either use the data loaders provided in this repository, or, if you want to get a visual impression of the dataset, use [https://github.com/maubreville/SlideRunner](our annotation tool SlideRunner).
+Besides [https://github.com/fastai/](fast.ai) you can use the following notebook to set up the dataset for you: [Setup.ipynb](Setup.ipynb). The download of the WSI from figshare will take a while. Once everything has been downloaded, you can either use the data loaders provided in this repository, or, if you want to get a visual impression of the dataset, use [our annotation tool SlideRunner](https://github.com/maubreville/SlideRunner)
 
 ## Training notebooks
 
