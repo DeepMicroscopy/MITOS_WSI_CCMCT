@@ -5,7 +5,7 @@
 This repository contains all code needed to derive the Technical Validation of our paper:
 > Bertram, C. A., Aubreville, M., Marzahl, C., Maier, A., & Klopfleisch, R. (2019). A large-scale dataset for mitotic figure assessment on whole slide images of canine cutaneous mast cell tumor. Scientific Data, 6(274), 1--9.
 
-The paper is open access and can be found [here](https://rdcu.be/bXnmD).
+The paper is open access and can be found [here](https://www.nature.com/articles/s41597-019-0290-4.pdf).
 
 A short video about it can be found on [youtube](https://youtu.be/1UV1_a5qyQM).
 
